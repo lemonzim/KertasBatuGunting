@@ -1,0 +1,65 @@
+package com.mycompany.kertasbatugunting;
+
+
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+/**
+ *
+ * @author Muhammad Hazim
+ */
+public class Menu extends JFrame implements ActionListener{
+    
+    private Container c;
+    private JPanel south;
+    private JButton Computer,manusia;
+    something info = new something();
+    public Menu(){
+        
+    super("Kertas Batu Gunting");
+
+    c = getContentPane();
+    c.setLayout(new GridLayout(1,1));
+    
+    south = new JPanel();
+    south.setLayout(new FlowLayout());
+    
+    Computer = new JButton("Computer");
+    Computer.addActionListener(this);
+    
+    manusia = new JButton("Manusia");
+    manusia.addActionListener(this);
+        
+    south.add(manusia);
+    south.add(Computer);
+    c.add(south);
+    setSize(100,150);
+    setLocation(370,275);
+    setVisible(true);
+    setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+    public static void main(String args[])
+    { Menu mn = new Menu();}
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()== Computer)
+        {
+            vsrobot rob = new vsrobot();
+            dispose();
+        }
+        
+        else if(e.getSource()== manusia)
+        {
+            vsmanusia man = new vsmanusia();
+            dispose();
+        }
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+}
