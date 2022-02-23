@@ -1,0 +1,309 @@
+
+package com.mycompany.kertasbatugunting;
+
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Random;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+/**
+ *
+ * @author Muhammad Hazim
+ */
+
+public class vsrobot extends JFrame implements ItemListener, ActionListener{
+    private Container a,c;
+    private JLabel gambarplayer,gambarrobot,gambartangan, gambarmusuh, keputusan;
+    private JLabel[] hati = new JLabel[10];
+    private JButton[] skin = new JButton[19];
+    private JFrame f = new JFrame();
+    private JPanel pilihskin,f1,f2,f3,f4, south, north, center, nyawa,nyawaplayer,nyawarobot, northa, northb,centera, centerb;
+    private final JButton kertas, batu, gunting;
+    private Random random;
+    private int playercounter = 0;
+    private int botcounter = 0;
+    
+    something info = new something();
+    
+    
+    public vsrobot(){
+    super("Kertas Batu Gunting");
+    JOptionPane.showMessageDialog(null,"Pilih Icon");
+    
+    a = getContentPane();
+    a.setLayout(new GridLayout(4,1));
+    
+    pilihskin = new JPanel();
+    pilihskin.setLayout(new GridLayout(1,1));
+
+    f1 = new JPanel();
+    f1.setLayout(new FlowLayout());
+    f2 = new JPanel();
+    f2.setLayout(new FlowLayout());
+    f3 = new JPanel();
+    f3.setLayout(new FlowLayout());
+    f4 = new JPanel();
+    f4.setLayout(new FlowLayout());
+    
+    
+    south = new JPanel();// nak letak dekat row 2 column 1, nak letak button2
+    south.setLayout(new FlowLayout());
+    
+    
+    north = new JPanel();// nak letak dekat row 1 column 1, nak letak gambar2
+    north.setLayout(new GridLayout(1,2));
+    northa = new JPanel();
+    northa.setLayout(new FlowLayout());
+    northb = new JPanel();
+    northb.setLayout(new FlowLayout());
+    nyawa= new JPanel();
+    nyawa.setLayout(new GridLayout(1,2));
+    nyawaplayer = new JPanel();
+    nyawaplayer.setLayout(new FlowLayout());
+    nyawarobot = new JPanel();
+    nyawarobot.setLayout(new FlowLayout());
+    
+    gambartangan = new JLabel();
+    gambartangan.setText(info.getnama1());
+    gambartangan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\question.png"));
+    
+    gambarmusuh = new JLabel();
+    gambarmusuh.setText("Computer");
+    gambarmusuh.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\question.png"));
+    
+    gambarplayer = new JLabel();
+    gambarrobot = new JLabel(info.gambarrobot());
+    
+    keputusan = new JLabel("Keputusan");
+    
+    nyawaplayer.add(gambarplayer);
+    //Skin
+    for(int i=0;i<19;i++)
+    {
+        skin[i] = new JButton(info.setgambar(i));
+        skin[i].setPreferredSize(new Dimension(100,82));
+        skin[i].addActionListener(this);
+    }
+   for(int i=0;i<3;i++)
+    {
+        switch (i) {
+            case 0:
+                for(int j=0;j<10;j++)
+                {f2.add(skin[j]);}
+                break;
+            case 1:
+                for(int j=10;j<15;j++)
+                {f3.add(skin[j]);}
+                break;
+            case 2:
+                for(int j=15;j<19;j++)
+                {f4.add(skin[j]);}
+                break;
+            default:
+                break;
+        }
+    }
+    nyawaplayer.add(gambarplayer);
+    //Hati
+    for(int i=0;i<5;i++)
+    {
+        hati[i] = new JLabel();
+        hati[i].setIcon(info.heart());
+        nyawaplayer.add(hati[i]);
+    }
+        for(int i=5;i<10;i++)
+    {
+        hati[i] = new JLabel(info.heart());
+        hati[i].setIcon(info.heart());
+        nyawarobot.add(hati[i]);
+    }
+        nyawarobot.add(gambarrobot);
+    
+    kertas = new JButton("kertas");
+    kertas.addActionListener(this);
+
+    
+    batu = new JButton("batu");
+    batu.addActionListener(this);
+    
+    gunting = new JButton("gunting");
+    gunting.addActionListener(this);
+    
+
+
+    nyawa.add(nyawaplayer);
+    nyawa.add(nyawarobot);
+        
+    northa.add(gambartangan);
+    northb.add(gambarmusuh);
+    north.add(northa);
+    north.add(northb);
+    
+    south.add(kertas);
+    south.add(batu);
+    south.add(gunting);
+    
+    f1.add(f2);
+    f1.add(f3);
+    f1.add(f4);
+    pilihskin.add(f1);
+    
+    a.add(pilihskin);
+    a.add(nyawa);
+    a.add(north);
+    a.add(south);
+    setSize(1400,950);
+    setVisible(true);
+    setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+    
+    public void pilihanmusuh(){
+    random = new Random();
+    random.nextInt(1, 4);
+        switch (random.nextInt(1, 4)) {
+            case 1 -> {
+                gambarmusuh.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\kertas.png"));
+                gambarmusuh.setText("kertas");
+            }
+            case 2 -> {
+                gambarmusuh.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\batu.png"));
+                gambarmusuh.setText("batu");
+            }
+            case 3 -> {
+                gambarmusuh.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\gunting.png"));
+                gambarmusuh.setText("gunting");
+            }
+            default -> {
+            }
+        }
+     }//if
+    public void updatehealthbar(int playercounter, int botcounter)
+    {
+        switch (playercounter) {
+            case 1 -> hati[9].setIcon(info.heartbreak());
+            case 2 -> hati[8].setIcon(info.heartbreak());
+            case 3 -> hati[7].setIcon(info.heartbreak());
+            case 4 -> hati[6].setIcon(info.heartbreak());
+            default -> {
+            }
+        }
+        
+        switch (botcounter) {
+            case 1 -> hati[4].setIcon(info.heartbreak());
+            case 2 -> hati[3].setIcon(info.heartbreak());
+            case 3 -> hati[2].setIcon(info.heartbreak());
+            case 4 -> hati[1].setIcon(info.heartbreak());
+            default -> {
+            }
+        }
+    }
+    public void tentukanpemenang()
+    {
+        if(gambartangan.getText().equals("kertas")&&gambarmusuh.getText().equals("kertas"))
+        {keputusan.setText("SERI");}
+        else if(gambartangan.getText().equals("kertas")&&gambarmusuh.getText().equals("gunting"))
+        {keputusan.setText("KALAH");}
+        else if(gambartangan.getText().equals("kertas")&&gambarmusuh.getText().equals("batu"))
+        {keputusan.setText("MENANG");}
+        
+        else if(gambartangan.getText().equals("gunting")&&gambarmusuh.getText().equals("kertas"))
+        {keputusan.setText("MENANG");}
+        else if(gambartangan.getText().equals("gunting")&&gambarmusuh.getText().equals("gunting"))
+        {keputusan.setText("SERI");}
+        else if(gambartangan.getText().equals("gunting")&&gambarmusuh.getText().equals("batu"))
+        {keputusan.setText("KALAH");}
+        
+        else if(gambartangan.getText().equals("batu")&&gambarmusuh.getText().equals("kertas"))
+        {keputusan.setText("KALAH");}
+        else if(gambartangan.getText().equals("batu")&&gambarmusuh.getText().equals("gunting"))
+        {keputusan.setText("MENANG");}
+        else if(gambartangan.getText().equals("batu")&&gambarmusuh.getText().equals("batu"))
+        {keputusan.setText("SERI");}
+    
+    }
+    public void updatecounter()
+    {
+        if(keputusan.getText().equals("KALAH"))
+        {
+            botcounter = botcounter + 1;
+        }
+        else if(keputusan.getText().equals("MENANG"))
+        {
+            playercounter = playercounter + 1;
+        }
+        
+    }
+    
+     public void keputusan(int playercounter, int botcounter)
+    {
+        if(playercounter>=5||botcounter>=5)
+        {
+           selepaslawanrobot mp = new selepaslawanrobot( playercounter, botcounter);
+        dispose();
+        }
+        
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==kertas)
+        {
+            gambartangan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\kertas.png"));
+            gambartangan.setText("kertas");
+            pilihanmusuh();
+
+        }
+        else if(e.getSource()==batu)
+        {
+            gambartangan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\batu.png"));
+            gambartangan.setText("batu");
+                        pilihanmusuh();
+        }
+        else if(e.getSource()==gunting)
+        {
+            gambartangan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\gunting.png"));
+            gambartangan.setText("gunting");
+                        pilihanmusuh();
+            
+        }
+        for(int i=0; i<19;i++)
+        {
+            if(e.getSource()==skin[i])
+            {
+                gambarplayer.setIcon(info.setgambar(i));
+                a.remove(0);
+                a.validate();
+                a.repaint();
+            }
+            
+        
+        }
+        
+
+            tentukanpemenang();
+            updatecounter();
+            updatehealthbar(playercounter,botcounter);
+            keputusan(playercounter,botcounter);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+}
