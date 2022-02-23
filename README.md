@@ -1,4 +1,4 @@
-# KertasBatuGunting
+# KertasBatuGunting(tak siap lagi)
 Coding untuk Permainan Kertas Batu Gunting
 Ada dua jenis:-
 Robot (Melawan Komputer)
