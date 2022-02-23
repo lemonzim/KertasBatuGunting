@@ -1,0 +1,350 @@
+package com.mycompany.kertasbatugunting;
+
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
+import static java.time.Clock.system;
+import static java.time.InstantSource.system;
+import java.util.Random;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.CANCEL_OPTION;
+import static javax.swing.JOptionPane.CLOSED_OPTION;
+import static javax.swing.JOptionPane.NO_OPTION;
+import static javax.swing.JOptionPane.OK_OPTION;
+import static javax.swing.JOptionPane.YES_OPTION;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
+/**
+ *
+ * @author Muhammad Hazim
+ */
+
+public class vsmanusia extends JFrame{
+    private Container a,c;
+    private JLabel namaplayer,namaplayer2,gambarplayer,gambarplayer2,gambartangan, gambarmusuh, keputusan;
+    private JLabel[] hati = new JLabel[10],skin = new JLabel[19],number = new JLabel[19];
+    private JFrame f = new JFrame();
+    private JPanel pilihskin,f1,f2,f3,f4, south, north, center, profile, profile2,nyawa,nyawaplayer,nyawaplayer2, northa, northb,centera, centerb;
+    private Random random;
+    private ImageIcon player,player2, icon,icon2;
+    private String text,text2;
+    private int playercounter = 0;
+    private int botcounter = 0;
+    private int inputgambar, inputtangan;
+    private int icongambar, icontangan;
+    
+    something info = new something();
+    
+    
+    public vsmanusia(){
+    super("Kertas Batu Gunting");
+    String nama = JOptionPane.showInputDialog(null,"Nama User 1");
+    if(nama.equalsIgnoreCase(null)){dispose();}
+    String nama2 = JOptionPane.showInputDialog(null,"Nama User 2");
+    if(nama2.equalsIgnoreCase(null)){dispose();}
+    info.setnama1(nama);
+    info.setnama2(nama2);
+    
+    a = getContentPane();
+    a.setLayout(new GridLayout(4,1));
+    
+    pilihskin = new JPanel();
+    pilihskin.setLayout(new GridLayout(1,1));
+
+    f1 = new JPanel();
+    f1.setLayout(new FlowLayout());
+    f2 = new JPanel();
+    f2.setLayout(new FlowLayout());
+    f3 = new JPanel();
+    f3.setLayout(new FlowLayout());
+    f4 = new JPanel();
+    f4.setLayout(new FlowLayout());
+    
+    
+    south = new JPanel();// nak letak dekat row 2 column 1, nak letak button2
+    south.setLayout(new FlowLayout());
+    
+    
+    north = new JPanel();// nak letak dekat row 1 column 1, nak letak gambar2
+    north.setLayout(new GridLayout(1,2));
+    northa = new JPanel();
+    northa.setLayout(new FlowLayout());
+    northb = new JPanel();
+    northb.setLayout(new FlowLayout());
+    nyawa= new JPanel();
+    nyawa.setLayout(new GridLayout(1,2));
+    nyawaplayer = new JPanel();
+    nyawaplayer.setLayout(new FlowLayout());
+    nyawaplayer2 = new JPanel();
+    nyawaplayer2.setLayout(new FlowLayout());
+    profile= new JPanel();
+    profile.setLayout(new GridLayout(2,1));
+    profile2= new JPanel();
+    profile2.setLayout(new GridLayout(2,1));
+    
+    gambartangan = new JLabel();
+    gambartangan.setText(info.getnama1());
+    gambartangan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\question.png"));
+    
+    gambarmusuh = new JLabel();
+    gambarmusuh.setText(info.getnama2());
+    gambarmusuh.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\question.png"));
+    
+    gambarplayer = new JLabel();
+    gambarplayer2 = new JLabel();
+    namaplayer = new JLabel(info.getnama1(),SwingConstants.CENTER);
+    namaplayer2 = new JLabel(info.getnama2(),SwingConstants.CENTER);
+    
+    keputusan = new JLabel("Keputusan");
+    
+    profile.add(gambarplayer);
+    profile.add(namaplayer);
+    nyawaplayer.add(profile);
+    //Skin
+    for(int i=0;i<19;i++)
+    {
+        skin[i] = new JLabel( info.setgambar(i));
+        skin[i].setPreferredSize(new Dimension(100,82));
+        number[i] = new JLabel(String.valueOf(i+1));
+    }
+   for(int i=0;i<3;i++)
+    {
+        switch (i) {
+            case 0:
+                for(int j=0;j<10;j++)
+                {
+                    f2.add(number[j]);
+                    f2.add(skin[j]);
+                }
+                break;
+            case 1:
+                for(int j=10;j<15;j++)
+                {
+                    f3.add(number[j]);
+                    f3.add(skin[j]);
+                }
+                break;
+            case 2:
+                for(int j=15;j<19;j++)
+                {
+                    f4.add(skin[j]);
+                    f4.add(number[j]);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    
+    nyawaplayer.add(profile2);
+    //Hati
+    for(int i=0;i<5;i++)
+    {
+        hati[i] = new JLabel();
+        hati[i].setIcon(info.heart());
+        nyawaplayer.add(hati[i]);
+    }
+        for(int i=5;i<10;i++)
+    {
+        hati[i] = new JLabel(info.heart());
+        hati[i].setIcon(info.heart());
+        nyawaplayer2.add(hati[i]);
+    }
+    profile2.add(gambarplayer2);
+    profile2.add(namaplayer2);
+    nyawaplayer2.add(profile2);
+  
+   
+    nyawa.add(nyawaplayer);
+    nyawa.add(nyawaplayer2);
+        
+    northa.add(gambartangan);
+    northb.add(gambarmusuh);
+    north.add(northa);
+    north.add(northb);
+    
+    f1.add(f2);
+    f1.add(f3);
+    f1.add(f4);
+    pilihskin.add(f1);
+    
+    a.add(pilihskin);
+    a.add(nyawa);
+    a.add(north);
+    a.add(south);
+    setSize(1400,950);
+    setVisible(true);
+    pilihgambar();
+    a.remove(0);
+    a.validate();
+    a.repaint();
+    do{
+    pilihtangan();
+    tentukanpemenang();
+    updatecounter();
+    updatehealthbar(playercounter,botcounter);
+    }while(playercounter<5 && botcounter<5);
+    keputusan(playercounter,botcounter);
+
+    setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+    public void pilihgambar()
+    {
+
+    do{
+        do{
+
+            icongambar= Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih Icon untuk "+info.getnama1()+"\n(Dari kiri ke kanan 1,2,3...)/n Tekan 20 jika mahu icon secara rawak"));
+            if(icongambar<1 || icongambar>20){JOptionPane.showMessageDialog(null,"Masukkan nombor yang betul!");}
+            }while((icongambar<1 || icongambar>20));
+        
+        if(icongambar ==20){inputgambar= JOptionPane.showConfirmDialog(null,"Anda pasti untuk menggunakan Icon ini?",null,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,player = info.randomsetgambar());}
+            else{ inputgambar= JOptionPane.showConfirmDialog(null,"Anda pasti untuk menggunakan Icon ini?",null,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,player = info.setgambar(icongambar-1));}
+
+    }while(inputgambar != YES_OPTION && inputgambar == NO_OPTION);
+    
+    if(icongambar ==20){gambarplayer.setIcon(player);}
+    else {gambarplayer.setIcon(player);}
+    
+    do{
+        do{    
+            icongambar= Integer.parseInt(JOptionPane.showInputDialog(null,"Pilih Icon untuk "+info.getnama2()+"\n(Dari kiri ke kanan 1,2,3...)/n Tekan 20 jika mahu icon secara rawak"));
+            if(icongambar<1 || icongambar>20){JOptionPane.showMessageDialog(null,"Masukkan nombor yang betul!");}
+        }while((icongambar<1 || icongambar>20));
+           if(icongambar ==20){inputgambar= JOptionPane.showConfirmDialog(null,"Anda pasti untuk menggunakan Icon ini?",null,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,player2 = info.randomsetgambar());}    
+           else inputgambar= JOptionPane.showConfirmDialog(null,"Anda pasti untuk menggunakan Icon ini?",null,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,player2 = info.setgambar(icongambar-1));
+
+        }while(inputgambar != YES_OPTION && inputgambar == NO_OPTION);
+            if(icongambar ==20){gambarplayer2.setIcon(player2);}
+            else {gambarplayer2.setIcon(player2);}
+    }
+   
+    public void pilihtangan()
+    {
+    do{
+            String[] options = new String[3];
+            options[0] = "Kertas";
+            options[1] = "Batu";
+            options[2] = "Gunting";
+             icontangan= JOptionPane.showOptionDialog(null,info.getnama1()+", Pilih tangan anda",null,JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,player,options,null);
+            switch (icontangan) {
+                case YES_OPTION -> gambartangan.setIcon(icon = info.pilihtangan(0));
+                case NO_OPTION  -> gambartangan.setIcon(icon = info.pilihtangan(1));
+                case CANCEL_OPTION -> gambartangan.setIcon(icon = info.pilihtangan(2));
+                case CLOSED_OPTION -> System.exit(0);
+                default -> {
+            }
+            }
+        //if(icon<1 || icon>3){JOptionPane.showMessageDialog(null,"Masukkan nombor yang betul!");}
+            inputtangan= JOptionPane.showConfirmDialog(null,"Anda pasti untuk menggunakan tangan ini?",null,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icon);
+
+    }while(inputtangan != YES_OPTION && inputtangan == NO_OPTION);
+    gambartangan.setIcon(icon);
+    gambartangan.setText(text = info.gettangan(icontangan));
+    gambartangan.setVisible(false);
+    
+    
+    do{
+            String[] options = new String[3];
+            options[0] = "Kertas";
+            options[1] = "Batu";
+            options[2] = "Gunting";
+             icontangan= JOptionPane.showOptionDialog(null,info.getnama2()+", Pilih tangan anda",null,JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,player2,options,null);
+            switch (icontangan) {
+                case YES_OPTION -> gambartangan.setIcon(icon2= info.pilihtangan(0));
+                case NO_OPTION -> gambartangan.setIcon(icon2= info.pilihtangan(1));
+                case CANCEL_OPTION -> gambartangan.setIcon(icon2= info.pilihtangan(2));
+                case CLOSED_OPTION -> System.exit(0);
+                default -> {
+            }
+            }
+        //if(icon<1 || icon>3){JOptionPane.showMessageDialog(null,"Masukkan nombor yang betul!");}
+            inputtangan= JOptionPane.showConfirmDialog(null,"Anda pasti untuk menggunakan tangan ini?",null,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icon2);
+
+    }while(inputtangan != YES_OPTION && inputtangan == NO_OPTION);
+    gambarmusuh.setIcon(icon2);
+    gambarmusuh.setText(text2 = info.gettangan(icontangan));
+    gambartangan.setVisible(true);
+    }
+    
+    public void updatehealthbar(int playercounter, int botcounter)
+    {
+        switch (playercounter) {
+            case 1 -> hati[9].setIcon(info.heartbreak());
+            case 2 -> hati[8].setIcon(info.heartbreak());
+            case 3 -> hati[7].setIcon(info.heartbreak());
+            case 4 -> hati[6].setIcon(info.heartbreak());
+            default -> {
+            }
+        }
+        
+        switch (botcounter) {
+            case 1 -> hati[4].setIcon(info.heartbreak());
+            case 2 -> hati[3].setIcon(info.heartbreak());
+            case 3 -> hati[2].setIcon(info.heartbreak());
+            case 4 -> hati[1].setIcon(info.heartbreak());
+            default -> {
+            }
+        }
+    }
+    public void tentukanpemenang()
+    {
+        if(gambartangan.getText().equals("kertas")&&gambarmusuh.getText().equals("kertas"))
+        {keputusan.setText("SERI");}
+        else if(gambartangan.getText().equals("kertas")&&gambarmusuh.getText().equals("gunting"))
+        {keputusan.setText("KALAH");}
+        else if(gambartangan.getText().equals("kertas")&&gambarmusuh.getText().equals("batu"))
+        {keputusan.setText("MENANG");}
+        
+        else if(gambartangan.getText().equals("gunting")&&gambarmusuh.getText().equals("kertas"))
+        {keputusan.setText("MENANG");}
+        else if(gambartangan.getText().equals("gunting")&&gambarmusuh.getText().equals("gunting"))
+        {keputusan.setText("SERI");}
+        else if(gambartangan.getText().equals("gunting")&&gambarmusuh.getText().equals("batu"))
+        {keputusan.setText("KALAH");}
+        
+        else if(gambartangan.getText().equals("batu")&&gambarmusuh.getText().equals("kertas"))
+        {keputusan.setText("KALAH");}
+        else if(gambartangan.getText().equals("batu")&&gambarmusuh.getText().equals("gunting"))
+        {keputusan.setText("MENANG");}
+        else if(gambartangan.getText().equals("batu")&&gambarmusuh.getText().equals("batu"))
+        {keputusan.setText("SERI");}
+    
+    }
+    public void updatecounter()
+    {
+        switch (keputusan.getText()) {
+            case "KALAH" -> botcounter = botcounter + 1;
+            case "MENANG" -> playercounter = playercounter + 1;
+            case "SERI" -> {
+                playercounter = playercounter + 1;
+                botcounter = botcounter + 1;
+            }
+            default -> {
+            }
+        }
+        
+    }
+    
+     public void keputusan(int playercounter, int botcounter)
+    {
+        if(playercounter>=5||botcounter>=5)
+        {
+           selepaslawanmanusia mp = new selepaslawanmanusia(info.getnama1(),info.getnama2(),playercounter, botcounter,gambarplayer,gambarmusuh, player ,player2);
+        dispose();
+        }
+        
+    }
+}
+
+  
