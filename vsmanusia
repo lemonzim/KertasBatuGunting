@@ -1,27 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.mycompany.kertasbatugunting;
 
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
-import static java.time.Clock.system;
-import static java.time.InstantSource.system;
-import java.util.Random;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.CANCEL_OPTION;
-import static javax.swing.JOptionPane.CLOSED_OPTION;
-import static javax.swing.JOptionPane.NO_OPTION;
-import static javax.swing.JOptionPane.OK_OPTION;
-import static javax.swing.JOptionPane.YES_OPTION;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
+import java.awt.*;
+import javax.swing.*;
+import static javax.swing.JOptionPane.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
@@ -30,18 +15,16 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  */
 
 public class vsmanusia extends JFrame{
-    private Container a,c;
-    private JLabel namaplayer,namaplayer2,gambarplayer,gambarplayer2,gambartangan, gambarmusuh, keputusan;
+    private Container a;
+    private JLabel namaplayer,namaplayer2,gambarplayer,gambarplayer2,gambartanganplayerlabel, gambartanganplayer2label, keputusan;
     private JLabel[] hati = new JLabel[10],skin = new JLabel[19],number = new JLabel[19];
-    private JFrame f = new JFrame();
-    private JPanel pilihskin,f1,f2,f3,f4, south, north, center, profile, profile2,nyawa,nyawaplayer,nyawaplayer2, northa, northb,centera, centerb;
-    private Random random;
+    private JPanel skinrow,skinrowa,humanicon,animalicon,transporticon, gambartanganrow, profile, profile2,nyawa,nyawaplayer,nyawaplayer2, gambartanganplayer, gambartanganplayer2;
     private ImageIcon player,player2, icon,icon2;
-    private String text,text2;
     private int playercounter = 0;
     private int botcounter = 0;
     private int inputgambar, inputtangan;
     private int icongambar, icontangan;
+    private String text,text2;
     
     something info = new something();
     
@@ -56,31 +39,27 @@ public class vsmanusia extends JFrame{
     info.setnama2(nama2);
     
     a = getContentPane();
-    a.setLayout(new GridLayout(4,1));
+    a.setLayout(new GridLayout(3,1));
     
-    pilihskin = new JPanel();
-    pilihskin.setLayout(new GridLayout(1,1));
+    skinrow = new JPanel();
+    skinrow.setLayout(new GridLayout(1,1));
 
-    f1 = new JPanel();
-    f1.setLayout(new FlowLayout());
-    f2 = new JPanel();
-    f2.setLayout(new FlowLayout());
-    f3 = new JPanel();
-    f3.setLayout(new FlowLayout());
-    f4 = new JPanel();
-    f4.setLayout(new FlowLayout());
+    skinrowa = new JPanel();
+    skinrowa.setLayout(new FlowLayout());
+    humanicon = new JPanel();
+    humanicon.setLayout(new FlowLayout());
+    animalicon = new JPanel();
+    animalicon.setLayout(new FlowLayout());
+    transporticon = new JPanel();
+    transporticon.setLayout(new FlowLayout());
     
     
-    south = new JPanel();// nak letak dekat row 2 column 1, nak letak button2
-    south.setLayout(new FlowLayout());
-    
-    
-    north = new JPanel();// nak letak dekat row 1 column 1, nak letak gambar2
-    north.setLayout(new GridLayout(1,2));
-    northa = new JPanel();
-    northa.setLayout(new FlowLayout());
-    northb = new JPanel();
-    northb.setLayout(new FlowLayout());
+    gambartanganrow = new JPanel();
+    gambartanganrow.setLayout(new GridLayout(1,2));
+    gambartanganplayer = new JPanel();
+    gambartanganplayer.setLayout(new FlowLayout());
+    gambartanganplayer2 = new JPanel();
+    gambartanganplayer2.setLayout(new FlowLayout());
     nyawa= new JPanel();
     nyawa.setLayout(new GridLayout(1,2));
     nyawaplayer = new JPanel();
@@ -92,13 +71,13 @@ public class vsmanusia extends JFrame{
     profile2= new JPanel();
     profile2.setLayout(new GridLayout(2,1));
     
-    gambartangan = new JLabel();
-    gambartangan.setText(info.getnama1());
-    gambartangan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\question.png"));
+    gambartanganplayerlabel = new JLabel();
+    gambartanganplayerlabel.setText(info.getnama1());
+    gambartanganplayerlabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\question.png"));
     
-    gambarmusuh = new JLabel();
-    gambarmusuh.setText(info.getnama2());
-    gambarmusuh.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\question.png"));
+    gambartanganplayer2label = new JLabel();
+    gambartanganplayer2label.setText(info.getnama2());
+    gambartanganplayer2label.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\question.png"));
     
     gambarplayer = new JLabel();
     gambarplayer2 = new JLabel();
@@ -120,29 +99,29 @@ public class vsmanusia extends JFrame{
    for(int i=0;i<3;i++)
     {
         switch (i) {
-            case 0:
+            case 0 -> {
                 for(int j=0;j<10;j++)
                 {
-                    f2.add(number[j]);
-                    f2.add(skin[j]);
+                    humanicon.add(number[j]);
+                    humanicon.add(skin[j]);
                 }
-                break;
-            case 1:
+            }
+            case 1 -> {
                 for(int j=10;j<15;j++)
                 {
-                    f3.add(number[j]);
-                    f3.add(skin[j]);
+                    animalicon.add(number[j]);
+                    animalicon.add(skin[j]);
                 }
-                break;
-            case 2:
+            }
+            case 2 -> {
                 for(int j=15;j<19;j++)
                 {
-                    f4.add(skin[j]);
-                    f4.add(number[j]);
+                    transporticon.add(skin[j]);
+                    transporticon.add(number[j]);
                 }
-                break;
-            default:
-                break;
+            }
+            default -> {
+            }
         }
     }
     
@@ -168,20 +147,19 @@ public class vsmanusia extends JFrame{
     nyawa.add(nyawaplayer);
     nyawa.add(nyawaplayer2);
         
-    northa.add(gambartangan);
-    northb.add(gambarmusuh);
-    north.add(northa);
-    north.add(northb);
+    gambartanganplayer.add(gambartanganplayerlabel);
+    gambartanganplayer2.add(gambartanganplayer2label);
+    gambartanganrow.add(gambartanganplayer);
+    gambartanganrow.add(gambartanganplayer2);
     
-    f1.add(f2);
-    f1.add(f3);
-    f1.add(f4);
-    pilihskin.add(f1);
+    skinrowa.add(humanicon);
+    skinrowa.add(animalicon);
+    skinrowa.add(transporticon);
+    skinrow.add(skinrowa);
     
-    a.add(pilihskin);
+    a.add(skinrow);
     a.add(nyawa);
-    a.add(north);
-    a.add(south);
+    a.add(gambartanganrow);
     setSize(1400,950);
     setVisible(true);
     pilihgambar();
@@ -238,9 +216,9 @@ public class vsmanusia extends JFrame{
             options[2] = "Gunting";
              icontangan= JOptionPane.showOptionDialog(null,info.getnama1()+", Pilih tangan anda",null,JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,player,options,null);
             switch (icontangan) {
-                case YES_OPTION -> gambartangan.setIcon(icon = info.pilihtangan(0));
-                case NO_OPTION  -> gambartangan.setIcon(icon = info.pilihtangan(1));
-                case CANCEL_OPTION -> gambartangan.setIcon(icon = info.pilihtangan(2));
+                case YES_OPTION -> gambartanganplayerlabel.setIcon(icon = info.pilihtangan(0));
+                case NO_OPTION  -> gambartanganplayerlabel.setIcon(icon = info.pilihtangan(1));
+                case CANCEL_OPTION -> gambartanganplayerlabel.setIcon(icon = info.pilihtangan(2));
                 case CLOSED_OPTION -> System.exit(0);
                 default -> {
             }
@@ -249,9 +227,9 @@ public class vsmanusia extends JFrame{
             inputtangan= JOptionPane.showConfirmDialog(null,"Anda pasti untuk menggunakan tangan ini?",null,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icon);
 
     }while(inputtangan != YES_OPTION && inputtangan == NO_OPTION);
-    gambartangan.setIcon(icon);
-    gambartangan.setText(text = info.gettangan(icontangan));
-    gambartangan.setVisible(false);
+    gambartanganplayerlabel.setIcon(icon);
+    gambartanganplayerlabel.setText(text=info.gettangan(icontangan));
+    gambartanganplayerlabel.setVisible(false);
     
     
     do{
@@ -261,9 +239,9 @@ public class vsmanusia extends JFrame{
             options[2] = "Gunting";
              icontangan= JOptionPane.showOptionDialog(null,info.getnama2()+", Pilih tangan anda",null,JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,player2,options,null);
             switch (icontangan) {
-                case YES_OPTION -> gambartangan.setIcon(icon2= info.pilihtangan(0));
-                case NO_OPTION -> gambartangan.setIcon(icon2= info.pilihtangan(1));
-                case CANCEL_OPTION -> gambartangan.setIcon(icon2= info.pilihtangan(2));
+                case YES_OPTION -> gambartanganplayerlabel.setIcon(icon2= info.pilihtangan(0));
+                case NO_OPTION -> gambartanganplayerlabel.setIcon(icon2= info.pilihtangan(1));
+                case CANCEL_OPTION -> gambartanganplayerlabel.setIcon(icon2= info.pilihtangan(2));
                 case CLOSED_OPTION -> System.exit(0);
                 default -> {
             }
@@ -272,9 +250,9 @@ public class vsmanusia extends JFrame{
             inputtangan= JOptionPane.showConfirmDialog(null,"Anda pasti untuk menggunakan tangan ini?",null,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icon2);
 
     }while(inputtangan != YES_OPTION && inputtangan == NO_OPTION);
-    gambarmusuh.setIcon(icon2);
-    gambarmusuh.setText(text2 = info.gettangan(icontangan));
-    gambartangan.setVisible(true);
+    gambartanganplayer2label.setIcon(icon2);
+    gambartanganplayer2label.setText(text2= info.gettangan(icontangan));
+    gambartanganplayerlabel.setVisible(true);
     }
     
     public void updatehealthbar(int playercounter, int botcounter)
@@ -299,25 +277,25 @@ public class vsmanusia extends JFrame{
     }
     public void tentukanpemenang()
     {
-        if(gambartangan.getText().equals("kertas")&&gambarmusuh.getText().equals("kertas"))
+        if(gambartanganplayerlabel.getText().equals("kertas")&&gambartanganplayer2label.getText().equals("kertas"))
         {keputusan.setText("SERI");}
-        else if(gambartangan.getText().equals("kertas")&&gambarmusuh.getText().equals("gunting"))
+        else if(gambartanganplayerlabel.getText().equals("kertas")&&gambartanganplayer2label.getText().equals("gunting"))
         {keputusan.setText("KALAH");}
-        else if(gambartangan.getText().equals("kertas")&&gambarmusuh.getText().equals("batu"))
+        else if(gambartanganplayerlabel.getText().equals("kertas")&&gambartanganplayer2label.getText().equals("batu"))
         {keputusan.setText("MENANG");}
         
-        else if(gambartangan.getText().equals("gunting")&&gambarmusuh.getText().equals("kertas"))
+        else if(gambartanganplayerlabel.getText().equals("gunting")&&gambartanganplayer2label.getText().equals("kertas"))
         {keputusan.setText("MENANG");}
-        else if(gambartangan.getText().equals("gunting")&&gambarmusuh.getText().equals("gunting"))
+        else if(gambartanganplayerlabel.getText().equals("gunting")&&gambartanganplayer2label.getText().equals("gunting"))
         {keputusan.setText("SERI");}
-        else if(gambartangan.getText().equals("gunting")&&gambarmusuh.getText().equals("batu"))
+        else if(gambartanganplayerlabel.getText().equals("gunting")&&gambartanganplayer2label.getText().equals("batu"))
         {keputusan.setText("KALAH");}
         
-        else if(gambartangan.getText().equals("batu")&&gambarmusuh.getText().equals("kertas"))
+        else if(gambartanganplayerlabel.getText().equals("batu")&&gambartanganplayer2label.getText().equals("kertas"))
         {keputusan.setText("KALAH");}
-        else if(gambartangan.getText().equals("batu")&&gambarmusuh.getText().equals("gunting"))
+        else if(gambartanganplayerlabel.getText().equals("batu")&&gambartanganplayer2label.getText().equals("gunting"))
         {keputusan.setText("MENANG");}
-        else if(gambartangan.getText().equals("batu")&&gambarmusuh.getText().equals("batu"))
+        else if(gambartanganplayerlabel.getText().equals("batu")&&gambartanganplayer2label.getText().equals("batu"))
         {keputusan.setText("SERI");}
     
     }
@@ -340,7 +318,7 @@ public class vsmanusia extends JFrame{
     {
         if(playercounter>=5||botcounter>=5)
         {
-           selepaslawanmanusia mp = new selepaslawanmanusia(info.getnama1(),info.getnama2(),playercounter, botcounter,gambarplayer,gambarmusuh, player ,player2);
+           selepaslawanmanusia mp = new selepaslawanmanusia(info.getnama1(),info.getnama2(),playercounter, botcounter,gambarplayer,gambarplayer2, player ,player2);
         dispose();
         }
         
