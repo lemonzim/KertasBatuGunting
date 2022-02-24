@@ -1,24 +1,9 @@
-
 package com.mycompany.kertasbatugunting;
 
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.Random;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
  *
@@ -26,12 +11,11 @@ import javax.swing.JTextField;
  */
 
 public class vsrobot extends JFrame implements ItemListener, ActionListener{
-    private Container a,c;
-    private JLabel gambarplayer,gambarrobot,gambartangan, gambarmusuh, keputusan;
+    private Container a;
+    private JLabel gambarplayer,gambarrobot,gambartanganlabel, gambartanganmusuhlabel, keputusan;
     private JLabel[] hati = new JLabel[10];
     private JButton[] skin = new JButton[19];
-    private JFrame f = new JFrame();
-    private JPanel pilihskin,f1,f2,f3,f4, south, north, center, nyawa,nyawaplayer,nyawarobot, northa, northb,centera, centerb;
+    private JPanel skinrow,skinrowa,humanicon,animalicon,transporticon, buttonrow, gambarpilihanrow, nyawa,nyawaplayer,nyawarobot, gambartangan, gambartanganmusuh;
     private final JButton kertas, batu, gunting;
     private Random random;
     private int playercounter = 0;
@@ -42,34 +26,33 @@ public class vsrobot extends JFrame implements ItemListener, ActionListener{
     
     public vsrobot(){
     super("Kertas Batu Gunting");
-    JOptionPane.showMessageDialog(null,"Pilih Icon");
     
     a = getContentPane();
     a.setLayout(new GridLayout(4,1));
     
-    pilihskin = new JPanel();
-    pilihskin.setLayout(new GridLayout(1,1));
+    skinrow = new JPanel();
+    skinrow.setLayout(new GridLayout(1,1));
 
-    f1 = new JPanel();
-    f1.setLayout(new FlowLayout());
-    f2 = new JPanel();
-    f2.setLayout(new FlowLayout());
-    f3 = new JPanel();
-    f3.setLayout(new FlowLayout());
-    f4 = new JPanel();
-    f4.setLayout(new FlowLayout());
+    skinrowa = new JPanel();
+    skinrowa.setLayout(new FlowLayout());
+    humanicon = new JPanel();
+    humanicon.setLayout(new FlowLayout());
+    animalicon = new JPanel();
+    animalicon.setLayout(new FlowLayout());
+    transporticon = new JPanel();
+    transporticon.setLayout(new FlowLayout());
     
     
-    south = new JPanel();// nak letak dekat row 2 column 1, nak letak button2
-    south.setLayout(new FlowLayout());
+    buttonrow = new JPanel();
+    buttonrow.setLayout(new FlowLayout());
     
     
-    north = new JPanel();// nak letak dekat row 1 column 1, nak letak gambar2
-    north.setLayout(new GridLayout(1,2));
-    northa = new JPanel();
-    northa.setLayout(new FlowLayout());
-    northb = new JPanel();
-    northb.setLayout(new FlowLayout());
+    gambarpilihanrow = new JPanel();
+    gambarpilihanrow.setLayout(new GridLayout(1,2));
+    gambartangan = new JPanel();
+    gambartangan.setLayout(new FlowLayout());
+    gambartanganmusuh = new JPanel();
+    gambartanganmusuh.setLayout(new FlowLayout());
     nyawa= new JPanel();
     nyawa.setLayout(new GridLayout(1,2));
     nyawaplayer = new JPanel();
@@ -77,13 +60,13 @@ public class vsrobot extends JFrame implements ItemListener, ActionListener{
     nyawarobot = new JPanel();
     nyawarobot.setLayout(new FlowLayout());
     
-    gambartangan = new JLabel();
-    gambartangan.setText(info.getnama1());
-    gambartangan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\question.png"));
+    gambartanganlabel = new JLabel();
+    gambartanganlabel.setText(info.getnama1());
+    gambartanganlabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\question.png"));
     
-    gambarmusuh = new JLabel();
-    gambarmusuh.setText("Computer");
-    gambarmusuh.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\question.png"));
+    gambartanganmusuhlabel = new JLabel();
+    gambartanganmusuhlabel.setText("Computer");
+    gambartanganmusuhlabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\question.png"));
     
     gambarplayer = new JLabel();
     gambarrobot = new JLabel(info.gambarrobot());
@@ -103,15 +86,15 @@ public class vsrobot extends JFrame implements ItemListener, ActionListener{
         switch (i) {
             case 0:
                 for(int j=0;j<10;j++)
-                {f2.add(skin[j]);}
+                {humanicon.add(skin[j]);}
                 break;
             case 1:
                 for(int j=10;j<15;j++)
-                {f3.add(skin[j]);}
+                {animalicon.add(skin[j]);}
                 break;
             case 2:
                 for(int j=15;j<19;j++)
-                {f4.add(skin[j]);}
+                {transporticon.add(skin[j]);}
                 break;
             default:
                 break;
@@ -148,44 +131,46 @@ public class vsrobot extends JFrame implements ItemListener, ActionListener{
     nyawa.add(nyawaplayer);
     nyawa.add(nyawarobot);
         
-    northa.add(gambartangan);
-    northb.add(gambarmusuh);
-    north.add(northa);
-    north.add(northb);
+    gambartangan.add(gambartanganlabel);
+    gambartanganmusuh.add(gambartanganmusuhlabel);
+    gambarpilihanrow.add(gambartangan);
+    gambarpilihanrow.add(gambartanganmusuh);
     
-    south.add(kertas);
-    south.add(batu);
-    south.add(gunting);
+    buttonrow.add(kertas);
+    buttonrow.add(batu);
+    buttonrow.add(gunting);
     
-    f1.add(f2);
-    f1.add(f3);
-    f1.add(f4);
-    pilihskin.add(f1);
+    skinrowa.add(humanicon);
+    skinrowa.add(animalicon);
+    skinrowa.add(transporticon);
+    skinrow.add(skinrowa);
     
-    a.add(pilihskin);
+    a.add(skinrow);
     a.add(nyawa);
-    a.add(north);
-    a.add(south);
+    a.add(gambarpilihanrow);
+    a.add(buttonrow);
     setSize(1400,950);
     setVisible(true);
+    JOptionPane.showMessageDialog(null,"Pilih Icon");
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     
     public void pilihanmusuh(){
     random = new Random();
     random.nextInt(1, 4);
-        switch (random.nextInt(1, 4)) {
+        switch (random.nextInt(0, 3)) {
+            case 0 -> {
+                gambartanganmusuhlabel.setIcon(info.pilihtangan(0));
+                gambartanganmusuhlabel.setText(info.gettangan(0));
+            pilihanmusuh();
+            }
             case 1 -> {
-                gambarmusuh.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\kertas.png"));
-                gambarmusuh.setText("kertas");
+                gambartanganmusuhlabel.setIcon(info.pilihtangan(1));
+                gambartanganmusuhlabel.setText(info.gettangan(1));
             }
             case 2 -> {
-                gambarmusuh.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\batu.png"));
-                gambarmusuh.setText("batu");
-            }
-            case 3 -> {
-                gambarmusuh.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\gunting.png"));
-                gambarmusuh.setText("gunting");
+                gambartanganmusuhlabel.setIcon(info.pilihtangan(2));
+                gambartanganmusuhlabel.setText(info.gettangan(2));
             }
             default -> {
             }
@@ -213,38 +198,37 @@ public class vsrobot extends JFrame implements ItemListener, ActionListener{
     }
     public void tentukanpemenang()
     {
-        if(gambartangan.getText().equals("kertas")&&gambarmusuh.getText().equals("kertas"))
+        if(gambartanganlabel.getText().equals("kertas")&&gambartanganmusuhlabel.getText().equals("kertas"))
         {keputusan.setText("SERI");}
-        else if(gambartangan.getText().equals("kertas")&&gambarmusuh.getText().equals("gunting"))
+        else if(gambartanganlabel.getText().equals("kertas")&&gambartanganmusuhlabel.getText().equals("gunting"))
         {keputusan.setText("KALAH");}
-        else if(gambartangan.getText().equals("kertas")&&gambarmusuh.getText().equals("batu"))
+        else if(gambartanganlabel.getText().equals("kertas")&&gambartanganmusuhlabel.getText().equals("batu"))
         {keputusan.setText("MENANG");}
         
-        else if(gambartangan.getText().equals("gunting")&&gambarmusuh.getText().equals("kertas"))
+        else if(gambartanganlabel.getText().equals("gunting")&&gambartanganmusuhlabel.getText().equals("kertas"))
         {keputusan.setText("MENANG");}
-        else if(gambartangan.getText().equals("gunting")&&gambarmusuh.getText().equals("gunting"))
+        else if(gambartanganlabel.getText().equals("gunting")&&gambartanganmusuhlabel.getText().equals("gunting"))
         {keputusan.setText("SERI");}
-        else if(gambartangan.getText().equals("gunting")&&gambarmusuh.getText().equals("batu"))
+        else if(gambartanganlabel.getText().equals("gunting")&&gambartanganmusuhlabel.getText().equals("batu"))
         {keputusan.setText("KALAH");}
         
-        else if(gambartangan.getText().equals("batu")&&gambarmusuh.getText().equals("kertas"))
+        else if(gambartanganlabel.getText().equals("batu")&&gambartanganmusuhlabel.getText().equals("kertas"))
         {keputusan.setText("KALAH");}
-        else if(gambartangan.getText().equals("batu")&&gambarmusuh.getText().equals("gunting"))
+        else if(gambartanganlabel.getText().equals("batu")&&gambartanganmusuhlabel.getText().equals("gunting"))
         {keputusan.setText("MENANG");}
-        else if(gambartangan.getText().equals("batu")&&gambarmusuh.getText().equals("batu"))
+        else if(gambartanganlabel.getText().equals("batu")&&gambartanganmusuhlabel.getText().equals("batu"))
         {keputusan.setText("SERI");}
     
     }
     public void updatecounter()
     {
-        if(keputusan.getText().equals("KALAH"))
-        {
-            botcounter = botcounter + 1;
+        switch (keputusan.getText()) {
+            case "KALAH" -> botcounter = botcounter + 1;
+            case "MENANG" -> playercounter = playercounter + 1;
+            default -> {
+            }
         }
-        else if(keputusan.getText().equals("MENANG"))
-        {
-            playercounter = playercounter + 1;
-        }
+                
         
     }
     
@@ -265,27 +249,7 @@ public class vsrobot extends JFrame implements ItemListener, ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==kertas)
-        {
-            gambartangan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\kertas.png"));
-            gambartangan.setText("kertas");
-            pilihanmusuh();
-
-        }
-        else if(e.getSource()==batu)
-        {
-            gambartangan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\batu.png"));
-            gambartangan.setText("batu");
-                        pilihanmusuh();
-        }
-        else if(e.getSource()==gunting)
-        {
-            gambartangan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Muhammad Hazim\\Downloads\\gunting.png"));
-            gambartangan.setText("gunting");
-                        pilihanmusuh();
-            
-        }
-        for(int i=0; i<19;i++)
+       for(int i=0; i<19;i++)
         {
             if(e.getSource()==skin[i])
             {
@@ -297,8 +261,30 @@ public class vsrobot extends JFrame implements ItemListener, ActionListener{
             
         
         }
-        
+        if(e.getSource()==kertas)
+        {
+            
+            gambartanganlabel.setIcon(info.pilihtangan(0));
+            gambartanganlabel.setText(info.gettangan(0));
+            pilihanmusuh();
 
+
+        }
+        else if(e.getSource()==batu)
+        {
+            gambartanganlabel.setIcon(info.pilihtangan(1));
+            gambartanganlabel.setText(info.gettangan(1));
+            pilihanmusuh();
+        }
+        else if(e.getSource()==gunting)
+        {
+            gambartanganlabel.setIcon(info.pilihtangan(2));
+            gambartanganlabel.setText(info.gettangan(2));
+            pilihanmusuh();
+            
+        }
+        
+        
             tentukanpemenang();
             updatecounter();
             updatehealthbar(playercounter,botcounter);
