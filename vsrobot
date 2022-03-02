@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.mycompany.kertasbatugunting;
 
 import java.awt.*;
@@ -162,7 +166,6 @@ public class vsrobot extends JFrame implements ItemListener, ActionListener{
             case 0 -> {
                 gambartanganmusuhlabel.setIcon(info.pilihtangan(0));
                 gambartanganmusuhlabel.setText(info.gettangan(0));
-            pilihanmusuh();
             }
             case 1 -> {
                 gambartanganmusuhlabel.setIcon(info.pilihtangan(1));
